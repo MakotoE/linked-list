@@ -111,10 +111,8 @@ TEST(List, remove) {
 		EXPECT_EQ(tests[i].list, tests[i].expected) << i;
 	}
 
-	{
-		List<int> list;
-		EXPECT_THROW(list.remove(0), std::out_of_range);
-	}
+	EXPECT_THROW(List<int>().remove(0), std::out_of_range);
+	EXPECT_THROW(List({0}).remove(1), std::out_of_range);
 }
 
 TEST(List, nodeAt) {

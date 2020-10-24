@@ -76,7 +76,7 @@ public:
 	}
 
 	void remove(size_t index) {
-		if (_size == 0) {
+		if (index >= _size) {
 			throw std::out_of_range("index is out of range");
 		}
 
