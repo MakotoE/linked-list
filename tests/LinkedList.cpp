@@ -66,6 +66,57 @@ TEST(List, insert) {
 	}
 }
 
+TEST(List, remove) {
+	struct Test {
+		List<int> list;
+		size_t index;
+		List<int> expected;
+	};
+
+	std::vector<Test> tests {
+		{
+			{0},
+			0,
+			{},
+		},
+		{
+			{0, 1},
+			0,
+			{1},
+		},
+		{
+			{0, 1},
+			1,
+			{0},
+		},
+		{
+			{0, 1, 2},
+			0,
+			{1, 2},
+		},
+		{
+			{0, 1, 2},
+			1,
+			{0, 2},
+		},
+		{
+			{0, 1, 2},
+			2,
+			{0, 1},
+		},
+	};
+
+	for (size_t i = 0; i < tests.size(); ++i) {
+		tests[i].list.remove(tests[i].index);
+		EXPECT_EQ(tests[i].list, tests[i].expected) << i;
+	}
+
+	{
+		List<int> list;
+		EXPECT_THROW(list.remove(0), std::out_of_range);
+	}
+}
+
 TEST(List, nodeAt) {
 	{
 		List<int> list;

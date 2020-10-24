@@ -75,6 +75,20 @@ public:
 		++_size;
 	}
 
+	void remove(size_t index) {
+		if (_size == 0) {
+			throw std::out_of_range("index is out of range");
+		}
+
+		if (index == 0) {
+			_head = std::move(_head->next);
+		} else {
+			Node& previous = nodeAt(index - 1);
+			previous.next = std::move(previous.next->next);
+		}
+		--_size;
+	}
+
 	const Node& nodeAt(size_t index) const {
 		if (index >= _size) {
 			throw std::out_of_range("index is out of range");
